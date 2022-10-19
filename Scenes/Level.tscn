@@ -1,0 +1,243 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Font Data/text_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Sprites/SnakeSegment.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Food.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/SnakeSegment.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Font Data/Title_dynamicfont.tres" type="DynamicFont" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 512, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 254 )
+
+[node name="Level" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 48.0, 560.0 ],
+"_edit_vertical_guides_": [ 48.0, 976.0 ]
+}
+
+[node name="SnakeSegment" parent="." instance=ExtResource( 4 )]
+position = Vector2( 256, 256 )
+
+[node name="SnakeSegment2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 224, 256 )
+segment_index = 1
+is_head = false
+
+[node name="SnakeSegment3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 192, 256 )
+segment_index = 2
+is_head = false
+
+[node name="WallTop" type="Area2D" parent="." groups=["Walls"]]
+position = Vector2( 10, 26 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+position = Vector2( 502, 6 )
+shape = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="WallTop"]
+modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+margin_left = -10.0
+margin_top = -42.0
+margin_right = 1014.0
+margin_bottom = 22.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="WallBottom" type="Area2D" parent="." groups=["Walls"]]
+position = Vector2( 10, 570 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+position = Vector2( 502, 6 )
+shape = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="WallBottom"]
+modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 1014.0
+margin_bottom = 54.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="WallLeft" type="Area2D" parent="." groups=["Walls"]]
+position = Vector2( 26, 558 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+position = Vector2( 6, -254 )
+shape = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="WallLeft"]
+modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+margin_left = -42.0
+margin_top = -510.0
+margin_right = 22.0
+margin_bottom = 2.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="WallRight" type="Area2D" parent="." groups=["Walls"]]
+position = Vector2( 986, 558 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+position = Vector2( 6, -256 )
+shape = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="WallRight"]
+modulate = Color( 0.133333, 0.133333, 0.133333, 1 )
+margin_left = -10.0
+margin_top = -510.0
+margin_right = 54.0
+margin_bottom = 2.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="Food" parent="." instance=ExtResource( 3 )]
+position = Vector2( 768, 256 )
+
+[node name="TitleNode" type="Node2D" parent="."]
+position = Vector2( 327, 104 )
+z_index = 1
+
+[node name="StartLabel" type="Label" parent="TitleNode"]
+margin_left = 98.0
+margin_top = 201.0
+margin_right = 271.0
+margin_bottom = 215.0
+text = "Press any direction to play!"
+align = 1
+valign = 1
+
+[node name="TitleLabel" type="Label" parent="TitleNode"]
+margin_right = 371.0
+margin_bottom = 116.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.0313726, 0.843137, 0.0862745, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "SNAKE"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="TitleNode/TitleLabel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -132.5
+margin_top = 51.0
+margin_right = 132.5
+margin_bottom = 90.0
+custom_colors/font_color = Color( 0.333, 0.66375, 0.9, 1 )
+text = "Godot Edition!"
+
+[node name="UI" type="Node2D" parent="."]
+z_index = 1
+
+[node name="SegmentLabel" type="Label" parent="UI"]
+margin_left = 60.0
+margin_top = 59.0
+margin_right = 139.0
+margin_bottom = 73.0
+text = "Segments: 0"
+align = 1
+valign = 1
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+margin_left = 60.0
+margin_top = 83.0
+margin_right = 111.0
+margin_bottom = 97.0
+text = "Score: 0"
+
+[node name="GameOverNode" type="Node2D" parent="."]
+z_index = 2
+
+[node name="GameOverMenu" type="Panel" parent="GameOverNode"]
+pause_mode = 2
+visible = false
+modulate = Color( 1, 1, 1, 0.807843 )
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Button" type="Button" parent="GameOverNode/GameOverMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -178.0
+margin_top = 17.0
+margin_right = 178.0
+margin_bottom = 123.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.0313726, 0.843137, 0.0862745, 1 )
+text = "Retry"
+
+[node name="GameOverLabel" type="Label" parent="GameOverNode/GameOverMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -169.0
+margin_right = 104.0
+margin_bottom = -119.0
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.0627451, 1 )
+text = "Game Over!"
+align = 1
+valign = 1
+
+[node name="SegmentsLabel" type="Label" parent="GameOverNode/GameOverMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -66.0
+margin_top = -58.0
+margin_right = 66.0
+margin_bottom = -30.0
+text = "Segments: 0"
+align = 1
+valign = 1
+
+[node name="HighscoreLabel" type="Label" parent="GameOverNode/GameOverMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -88.0
+margin_right = 63.0
+margin_bottom = -62.0
+text = "Highscore: 0"
+align = 1
+valign = 1
+
+[node name="ScoreLabel" type="Label" parent="GameOverNode/GameOverMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.0
+margin_top = -108.0
+margin_right = 62.0
+margin_bottom = -84.0
+text = "Score: 0"
+align = 1
+valign = 1
+
+[node name="SpacebarLabel" type="Label" parent="GameOverNode/GameOverMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -69.0
+margin_top = 124.0
+margin_right = 69.0
+margin_bottom = 154.0
+text = "(or press space)"
+align = 1
+valign = 1
