@@ -1,5 +1,5 @@
 # Godot-Snake-Game
-This is a clone/remake of snake the Godot game engine and is written using Godot's built-in programming language called GDScript
+This is a clone/remake of snake made using the Godot game engine and is written using Godot's built-in programming language called GDScript
 
 This version of snake does not use Godot's tilemap system for the snake's movement but rather the divisibility of the x and y values of the snake's head position to imitate grid based movement
 
